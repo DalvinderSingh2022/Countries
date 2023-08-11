@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import React, { memo, useEffect, useState } from "react";
+import Section from "./Section";
 
 const CardSection = ({ region }) => {
   const [countries, setCountries] = useState([]);
@@ -11,7 +11,7 @@ const CardSection = ({ region }) => {
           `https://restcountries.com/v3.1/region/${region}`
         );
         const result = await response.json();
-        setCountries(result);
+        if (result[0]) setCountries(result);
       } catch (error) {
         console.error(error);
       }
@@ -19,40 +19,9 @@ const CardSection = ({ region }) => {
     countryByRegion(region);
   }, []);
 
-  const scrollEvent = (e) => {
-    const parent = e.target.parentElement.parentElement.nextElementSibling;
-    const card = parent.querySelector(".card");
-    const width =
-      (parent.clientWidth / card ? card.clientWidth : 1) *
-      (card ? card.clientWidth : 1);
-
-    e.target.classList.contains("fa-arrow-left")
-      ? parent.scrollBy(-width, 0)
-      : parent.scrollBy(width, 0);
-  };
-
   return (
-    <section>
-      <div className="header">
-        <p className="region-name">{region}</p>
-        <div className="arrows">
-          <button
-            className="fa-solid fa-arrow-left"
-            onClick={scrollEvent}
-          ></button>
-          <button
-            className="fa-solid fa-arrow-right"
-            onClick={scrollEvent}
-          ></button>
-        </div>
-      </div>
-      <div className="cards">
-        {countries.map((country, index) => {
-          return <Card countryApi={country} key={index} />;
-        })}
-      </div>
-    </section>
+    <Section region={region} countries={countries} />
   );
 };
 
-export default CardSection;
+export default memo(CardSection);  
