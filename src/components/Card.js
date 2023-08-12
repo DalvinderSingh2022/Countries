@@ -17,8 +17,8 @@ const Card = ({ countryApi }) => {
         console.error(error);
       }
     }
-    countryData(countryApi?.name?.common);
-  }, []);
+    countryData(countryApi.name.common);
+  }, [countryApi.name.common]);
 
   return (
     country && (
