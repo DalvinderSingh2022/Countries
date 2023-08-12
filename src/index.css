@@ -7,7 +7,6 @@
   scroll-behavior: smooth;
 }
 
-body,
 #root {
   display: flex;
   flex-direction: column;
@@ -75,6 +74,7 @@ section .cards {
   padding: 1.5em;
   gap: 1em;
   justify-content: start;
+    animation: popup 1s ease;
 }
 
 section .cards .card {
@@ -175,4 +175,81 @@ section .cards .card {
     to {
         transform: translateY(35px) scaleX(1.15);
     }
+}
+
+
+.country {
+    width: calc(100% - 2em);
+    min-height: calc(100% - 2em);
+    display: grid;
+    padding: 1em;
+    align-items: center;
+    background: rgb(255, 255, 255);
+    z-index: 999;
+    justify-items: center;
+}
+
+.country .name {
+    font-size: 3.2em;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1em;
+}
+
+.country button {
+    background: #eee;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 8px;
+}
+
+.country .flag {
+    max-width: 360px;
+    height: 200px;
+    margin: 28px 0;
+    box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+.country .data {
+    background: rgb(238 238 238 / 60%);
+    align-self: stretch;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 1.2em;
+    animation: popup 1s ease;
+    overflow: hidden;
+}
+
+@keyframes popup {
+    0% {
+        transform: translateY(12px);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+.country .info {
+    text-transform: capitalize;
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.country .detail {
+    font-size: 1.6em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.country .wrapper {
+    width: 100%;
+    display: grid;
+    gap: 4px;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }

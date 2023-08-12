@@ -39,11 +39,11 @@ function Container() {
         className="search"
         onChange={(e) => setSearch(e.target.value)}
       />
-      {searchResult.length && <Section region={"Search"} countries={searchResult} />}
+      {searchResult.length > 0 && <Section region={"Search"} countries={searchResult} />}
       {regions.length ?
         <>
-          {regions.map((region, index) => {
-            return <CardSection region={region} key={index} />;
+          {regions.map(region => {
+            return <CardSection region={region} key={region} />;
           })}
         </>
         : <div className="loading"><i></i><i></i><i></i></div>

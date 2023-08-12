@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
+import { AppContext } from "../App";
 
 const Card = ({ countryApi }) => {
   const [country, setCountry] = useState({});
+  const { select } = useContext(AppContext);
 
   useEffect(() => {
     async function countryData(name) {
@@ -21,7 +23,7 @@ const Card = ({ countryApi }) => {
   return (
     country && (
       <div className="card" data-country={country?.name?.common}>
-        <h1 className="name">{country?.name?.common}</h1>
+        <h1 className="name" onClick={() => select(country)}>{country?.name?.common}</h1>
         <div
           className="flag"
           style={{ backgroundImage: `url(${country?.flags?.png})` }}
@@ -31,4 +33,4 @@ const Card = ({ countryApi }) => {
   );
 };
 
-export default Card;
+export default memo(Card);
